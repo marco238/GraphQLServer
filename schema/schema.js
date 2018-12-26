@@ -3,6 +3,7 @@ const _ = require('lodash');
 
 const {
     GraphQLObjectType, 
+    GraphQLList, 
     GraphQLString, 
     GraphQLSchema,
     GraphQLID,
@@ -47,6 +48,13 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args){
                 // code to get data from db/other source
                 return _.find(books, { id:args.id });
+            }
+        },
+        getBooks: {
+            type: new GraphQLList(BookType),
+            resolve(parent, args){
+                // code to get data from db/other source
+                return books;
             }
         },
         author: {
